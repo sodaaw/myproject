@@ -120,5 +120,22 @@ export const RECOMMEND_STEPS: StepConfig[] = [
       return { snack_score, snack_price };
     },
   },
+  {
+    id: 'distance',
+    title: '얼마나 멀리까지 나가볼까?',
+    helperText: '오늘 컨디션에 맞게 이동 시간 범위를 골라줘.',
+    optional: true,
+    hasNoPreferenceOption: true,
+    fieldKeys: ['walk_time_min', 'transport_time_min'],
+    options: [
+      { label: '학교 바로 앞이 좋겠어 (도보 5분 이내)', value: 5 },
+      { label: '10분 정도까지는 괜찮아', value: 10 },
+      { label: '조금 멀어도 괜찮아 (20분 이내)', value: 20 },
+    ],
+    mapValueToPatch: (value) => ({
+      walk_time_min: value,
+      transport_time_min: value,
+    }),
+  },
 ];
 

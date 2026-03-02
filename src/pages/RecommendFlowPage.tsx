@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
-import { ProgressBar } from '../components/ProgressBar';
 import { StepCard } from '../components/StepCard';
 import { RECOMMEND_STEPS } from '../features/recommend/steps';
 import { initialPreferences, type Preferences } from '../features/recommend/types';
+import type { PlaceTypeGroup } from './RecommendTypePage';
+import styles from './RecommendFlowPage.module.css';
 
 export function RecommendFlowPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { placeTypeGroup } = (location.state ?? {}) as { placeTypeGroup?: PlaceTypeGroup };
   const steps = useMemo(() => RECOMMEND_STEPS, []);
 
   const [stepIndex, setStepIndex] = useState(0);
@@ -17,7 +20,6 @@ export function RecommendFlowPage() {
   const total = steps.length;
   const current = stepIndex + 1;
 
-  const canGoPrev = stepIndex > 0;
   const isLast = stepIndex === total - 1;
 
   const hasSelectionForStep = step.fieldKeys.some((k) => preferences[k] !== null);
@@ -29,13 +31,17 @@ export function RecommendFlowPage() {
   };
 
   const goPrev = () => {
-    if (!canGoPrev) return;
+    // 첫 번째 질문에서 '이전'을 누르면 장소 범위 선택 페이지로 이동
+    if (stepIndex === 0) {
+      navigate('/recommend', { replace: true });
+      return;
+    }
     setStepIndex((i) => Math.max(0, i - 1));
   };
 
   const goNext = () => {
     if (isLast) {
-      navigate('/results', { state: { preferences } });
+      navigate('/results', { state: { preferences, placeTypeGroup } });
       return;
     }
     setStepIndex((i) => Math.min(total - 1, i + 1));
@@ -51,43 +57,58 @@ export function RecommendFlowPage() {
   };
 
   const recommendNow = () => {
-    navigate('/results', { state: { preferences } });
+    navigate('/results', { state: { preferences, placeTypeGroup } });
   };
 
   return (
-    <AppShell title="추천받기" showBottomTabs={false}>
-      <div style={{ maxWidth: 520, margin: '0 auto', padding: 16 }}>
-        <ProgressBar currentStep={current} totalSteps={total} />
+    <AppShell title="추천받기" showBottomTabs={false} showTopBar={false}>
+      <div className={styles.root}>
+        <div className={styles.card}>
+          <div className={styles.headerRibbon}>추천받기</div>
+          <div className={styles.progress}>
+            {current} / {total}
+          </div>
 
-        <div style={{ marginTop: 16 }}>
-          <StepCard
-            step={step}
-            preferences={preferences}
-            getPatchForValue={getPatchForValue}
-            onSelectValue={(value) =>
-              setPreferences((prev) => ({ ...prev, ...getPatchForValue(value) }))
-            }
-            onNoPreference={skipStep}
-          />
-        </div>
+          <div className={styles.body}>
+            <StepCard
+              step={step}
+              preferences={preferences}
+              getPatchForValue={getPatchForValue}
+              onSelectValue={(value) =>
+                setPreferences((prev) => ({ ...prev, ...getPatchForValue(value) }))
+              }
+              onNoPreference={skipStep}
+            />
+          </div>
 
-        <div style={{ display: 'flex', gap: 8, marginTop: 16, flexWrap: 'wrap' }}>
-          <button type="button" onClick={goPrev} disabled={!canGoPrev}>
-            이전
-          </button>
-          <button type="button" onClick={skipStep}>
-            건너뛰기
-          </button>
-          <button type="button" onClick={goNext} disabled={!hasSelectionForStep && !isLast}>
-            다음
-          </button>
-          <button type="button" onClick={recommendNow} style={{ marginLeft: 'auto' }}>
-            여기까지로 추천받기
-          </button>
-        </div>
+          <div className={styles.footer}>
+            <button
+              type="button"
+              onClick={goPrev}
+              className={`${styles.footerButton} ${styles.footerButtonPrev}`}
+            >
+              이전
+            </button>
+            <button
+              type="button"
+              onClick={skipStep}
+              className={`${styles.footerButton} ${styles.footerButtonSkip}`}
+            >
+              건너뛰기
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              disabled={!hasSelectionForStep && !isLast}
+              className={`${styles.footerButton} ${styles.footerButtonNext}`}
+            >
+              다음 &gt;
+            </button>
+          </div>
 
-        <div style={{ marginTop: 12, fontSize: 12, color: '#666' }}>
-          {step.optional ? '선택 단계' : '핵심 단계'} · {step.id}
+          <div className={styles.meta}>
+            {step.optional ? '선택 단계' : '핵심 단계'} · {current}/{total}
+          </div>
         </div>
       </div>
     </AppShell>

@@ -5,9 +5,12 @@ import { PlaceCard } from '../components/PlaceCard';
 import { getRecommendedPlaces } from '../lib/recommendationService';
 import type { Preferences } from '../features/recommend/types';
 import type { Place } from '../mock/places';
+import styles from './Results.module.css';
+import type { PlaceTypeGroup } from './RecommendTypePage';
 
 type ResultsLocationState = {
   preferences?: Preferences;
+  placeTypeGroup?: PlaceTypeGroup;
 };
 
 export const Results = () => {
@@ -16,15 +19,18 @@ export const Results = () => {
 
   const state = (location.state ?? {}) as ResultsLocationState;
   const preferences = state.preferences ?? null;
+  const placeTypeGroup = state.placeTypeGroup ?? 'any';
 
   const [loading, setLoading] = useState(true);
   const [places, setPlaces] = useState<Place[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   useEffect(() => {
+    setVisibleCount(4);
     setLoading(true);
     setError(null);
-    getRecommendedPlaces(preferences)
+    getRecommendedPlaces(preferences, placeTypeGroup)
       .then((list) => setPlaces(list))
       .catch((err) => {
         console.error('[Results] 추천 로딩 실패:', err);
@@ -32,49 +38,62 @@ export const Results = () => {
         setPlaces([]);
       })
       .finally(() => setLoading(false));
-  }, [preferences]);
+  }, [preferences, placeTypeGroup]);
+
+  const visiblePlaces = places.slice(0, visibleCount);
 
   return (
-    <AppShell title="추천 결과" showBottomTabs={true}>
-      <div className="results-page">
-        <h2 className="results-title">선택한 선호도</h2>
+    <AppShell title="추천 결과" showBottomTabs={false} showTopBar={false}>
+      <div className={styles.root}>
+        <div className={styles.card}>
+          <div className={styles.headerRibbon}>추천 결과</div>
 
-        <pre
-          style={{
-            background: '#111',
-            color: '#eee',
-            padding: 12,
-            borderRadius: 8,
-            overflowX: 'auto',
-          }}
-        >
-          {JSON.stringify(preferences, null, 2)}
-        </pre>
-
-        <div style={{ marginTop: 16 }}>
-          <h3 style={{ marginBottom: 8 }}>추천 장소</h3>
-          {loading ? (
-            <p>추천 생성 중...</p>
-          ) : error ? (
-            <p style={{ color: '#c00' }}>{error}</p>
-          ) : places.length === 0 ? (
-            <p>조건에 맞는 장소를 찾지 못했어요.</p>
-          ) : (
-            <div className="results-list">
-              {places.map((p) => (
-                <PlaceCard key={p.id} place={p} />
-              ))}
+          <div className={styles.body}>
+            <div className={styles.placesWrapper}>
+              <div className={styles.sectionTitle}>추천 장소</div>
+              {loading ? (
+                <p>추천 생성 중...</p>
+              ) : error ? (
+                <p className={styles.error}>{error}</p>
+              ) : places.length === 0 ? (
+                <p>조건에 맞는 장소를 찾지 못했어요.</p>
+              ) : (
+                <div className={styles.placesList}>
+                  {visiblePlaces.map((p) => (
+                    <PlaceCard key={p.id} place={p} />
+                  ))}
+                </div>
+              )}
+              {!loading && !error && visibleCount < places.length && (
+                <button
+                  type="button"
+                  className={styles.loadMore}
+                  onClick={() =>
+                    setVisibleCount((prev) => Math.min(prev + 4, places.length))
+                  }
+                >
+                  더 보기
+                </button>
+              )}
             </div>
-          )}
-        </div>
 
-        <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
-          <button type="button" onClick={() => navigate('/recommend')}>
-            다시 추천받기
-          </button>
-          <button type="button" onClick={() => navigate('/')}>
-            홈으로
-          </button>
+            <div className={styles.footer}>
+              <button
+                type="button"
+                onClick={() => navigate('/recommend')}
+                className={`${styles.footerButton} ${styles.footerButtonRetry}`}
+              >
+                다시 추천받기
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className={`${styles.footerButton} ${styles.footerButtonHome}`}
+              >
+                홈으로
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </AppShell>

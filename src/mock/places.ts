@@ -30,6 +30,9 @@ export interface Place {
    * Recommend metadata (Supabase places table numeric fields)
    * Optional for now to avoid breaking older pages.
    */
+  walk_time_min?: number;
+  transport_time_min?: number;
+  floor_info?: string;
   seat_comfort?: SeatComfort;
   whole_window?: WholeWindow;
   view_score?: ViewScore;

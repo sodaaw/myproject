@@ -3,7 +3,8 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
-import { Recommend } from './pages/Recommend';
+import { RecommendFlowPage } from './pages/RecommendFlowPage';
+import { RecommendTypePage } from './pages/RecommendTypePage';
 import { Results } from './pages/Results';
 import { PlaceDetail } from './pages/PlaceDetail';
 import { Map } from './pages/Map';
@@ -17,7 +18,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/recommend" element={<Recommend />} />
+        <Route path="/recommend" element={<RecommendTypePage />} />
+        <Route path="/recommend/flow" element={<RecommendFlowPage />} />
         <Route path="/results" element={<Results />} />
         <Route path="/place/:id" element={<PlaceDetail />} />
         <Route path="/map" element={<Map />} />

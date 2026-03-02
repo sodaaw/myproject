@@ -1,0 +1,70 @@
+.card {
+  border-radius: 20px;
+  border: 1px solid #ffd3ea;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 16px 14px 14px;
+}
+
+.title {
+  margin-bottom: 6px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #6b425c;
+}
+
+.helper {
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: #a3728d;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.optionButton {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid #ffc9e3;
+  background: #fffdfd;
+  text-align: left;
+  font: inherit;
+  font-size: 0.9rem;
+  color: #6b425c;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.optionButtonSelected {
+  border-color: #ff7fa8;
+  background: #ffe6f3;
+  box-shadow: 0 0 0 1px rgba(255, 152, 196, 0.6);
+}
+
+.optionHeart {
+  margin-left: 8px;
+  font-size: 0.9rem;
+  color: #ff7fa8;
+}
+
+.noPrefButton {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 12px;
+  border-radius: 14px;
+  border: 1px dashed #e0bfd3;
+  background: #fff9ff;
+  text-align: left;
+  font: inherit;
+  font-size: 0.9rem;
+  color: #a3728d;
+  cursor: pointer;
+}
+

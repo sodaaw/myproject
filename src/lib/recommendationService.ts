@@ -5,6 +5,7 @@
 import type { Place } from '../mock/places';
 import { getAllPlaces } from '../services/placesService';
 import type { Preferences } from '../features/recommend/types';
+import type { PlaceTypeGroup } from '../pages/RecommendTypePage';
 
 /**
  * 추천 결과 생성 (간단한 스코어링 기반)
@@ -13,12 +14,20 @@ import type { Preferences } from '../features/recommend/types';
  */
 export const getRecommendedPlaces = async (
   preferences?: Preferences | null,
+  placeTypeGroup: PlaceTypeGroup = 'any',
 ): Promise<Place[]> => {
   const allPlaces = await getAllPlaces();
 
-  // preferences 없으면 기존처럼 랜덤 3~5개
+  let candidates: Place[] = allPlaces;
+  if (placeTypeGroup === 'inside') {
+    candidates = allPlaces.filter((p) => p.type === 'school_space');
+  } else if (placeTypeGroup === 'outside') {
+    candidates = allPlaces.filter((p) => p.type === 'cafe' || p.type === 'study_space');
+  }
+
+  // preferences 없으면 타입 필터만 적용해서 랜덤 3~5개
   if (!preferences) {
-    const shuffled = [...allPlaces].sort(() => Math.random() - 0.5);
+    const shuffled = [...candidates].sort(() => Math.random() - 0.5);
     const count = Math.floor(Math.random() * 3) + 3;
     return shuffled.slice(0, count);
   }
@@ -68,12 +77,24 @@ export const getRecommendedPlaces = async (
       add(Math.abs(p.snack_price - preferences.snack_price), 0.5);
     }
 
+    // 거리/이동 시간 선호 (선호 범위를 넘어가면 가중치 부여)
+    if (preferences.walk_time_min !== null && typeof p.walk_time_min === 'number') {
+      const diff = p.walk_time_min - preferences.walk_time_min;
+      if (diff > 0) add(diff / 5, 1); // 선호보다 5분 멀어질 때마다 페널티
+      used += 1;
+    }
+    if (preferences.transport_time_min !== null && typeof p.transport_time_min === 'number') {
+      const diff = p.transport_time_min - preferences.transport_time_min;
+      if (diff > 0) add(diff / 5, 0.8);
+      used += 1;
+    }
+
     // 아무 것도 사용 못했으면 중립값
     if (used === 0) return 9999;
     return score;
   };
 
-  const scored = allPlaces
+  const scored = candidates
     .map((p) => ({ p, s: scorePlace(p) }))
     .sort((a, b) => a.s - b.s);
 

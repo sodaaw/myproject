@@ -1,5 +1,6 @@
 import type { Preferences } from '../features/recommend/types';
-import type { StepConfig, StepOption } from '../features/recommend/steps';
+import type { StepConfig } from '../features/recommend/steps';
+import styles from './StepCard.module.css';
 
 type StepCardProps = {
   step: StepConfig;
@@ -29,11 +30,11 @@ export function StepCard({
   onNoPreference,
 }: StepCardProps) {
   return (
-    <div style={{ border: '1px solid #ddd', padding: 16, borderRadius: 8 }}>
-      <div style={{ marginBottom: 8, fontWeight: 700 }}>{step.title}</div>
-      {step.helperText && <div style={{ marginBottom: 12, color: '#555' }}>{step.helperText}</div>}
+    <div className={styles.card}>
+      <div className={styles.title}>{step.title}</div>
+      {step.helperText && <div className={styles.helper}>{step.helperText}</div>}
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div className={styles.options}>
         {step.options.map((opt) => {
           const patch = getPatchForValue(opt.value);
           const selected = isOptionSelected(step, preferences, patch);
@@ -42,17 +43,10 @@ export function StepCard({
               key={opt.label}
               type="button"
               onClick={() => onSelectValue(opt.value)}
-              style={{
-                width: '100%',
-                minHeight: 52,
-                padding: '12px 14px',
-                textAlign: 'left',
-                borderRadius: 10,
-                border: selected ? '2px solid #222' : '1px solid #bbb',
-                background: selected ? '#f2f2f2' : 'white',
-              }}
+              className={`${styles.optionButton} ${selected ? styles.optionButtonSelected : ''}`}
             >
-              {opt.label}
+              <span>{opt.label}</span>
+              {selected && <span className={styles.optionHeart}>♡</span>}
             </button>
           );
         })}
@@ -61,16 +55,7 @@ export function StepCard({
           <button
             type="button"
             onClick={onNoPreference}
-            style={{
-              width: '100%',
-              minHeight: 52,
-              padding: '12px 14px',
-              textAlign: 'left',
-              borderRadius: 10,
-              border: '1px dashed #bbb',
-              background: '#fafafa',
-              color: '#555',
-            }}
+            className={styles.noPrefButton}
           >
             상관없어
           </button>

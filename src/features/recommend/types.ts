@@ -8,6 +8,8 @@ export type Preferences = {
   ceiling_height: number | null;
   snack_score: number | null;
   snack_price: number | null;
+  walk_time_min: number | null;
+  transport_time_min: number | null;
 };
 
 export const initialPreferences: Preferences = {
@@ -20,5 +22,7 @@ export const initialPreferences: Preferences = {
   ceiling_height: null,
   snack_score: null,
   snack_price: null,
+  walk_time_min: null,
+  transport_time_min: null,
 };
 

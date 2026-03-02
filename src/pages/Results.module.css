@@ -1,0 +1,147 @@
+.root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 16px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.9), transparent 55%),
+    linear-gradient(180deg, #ffe9f6 0%, #ffe0f0 40%, #ffe9f6 100%);
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  background: #fff7fd;
+  box-shadow:
+    0 18px 40px rgba(255, 137, 186, 0.3),
+    0 0 0 2px rgba(255, 255, 255, 0.9);
+  padding: 18px 18px 20px;
+  position: relative;
+}
+
+.headerRibbon {
+  position: relative;
+  margin: -24px auto 12px;
+  width: min(260px, 80%);
+  height: 52px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff9fce 0%, #ff6fa9 100%);
+  box-shadow:
+    0 10px 25px rgba(255, 112, 170, 0.6),
+    inset 0 2px 0 rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fffdfc;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+}
+
+.headerRibbon::before,
+.headerRibbon::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff8cbc;
+  bottom: -6px;
+  box-shadow: 0 6px 10px rgba(255, 120, 175, 0.5);
+}
+
+.headerRibbon::before {
+  left: 10px;
+}
+
+.headerRibbon::after {
+  right: 10px;
+}
+
+.body {
+  padding: 6px 4px 10px;
+}
+
+.sectionTitle {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #6b425c;
+  margin-bottom: 4px;
+}
+
+.jsonBox {
+  background: #111;
+  color: #eee;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  max-height: 160px;
+  overflow: auto;
+}
+
+.placesWrapper {
+  margin-top: 14px;
+}
+
+.placesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.loadMore {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 999px;
+  border: none;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  background: #ffe9f6;
+  color: #6b425c;
+  cursor: pointer;
+}
+
+.error {
+  color: #c00;
+  font-size: 0.85rem;
+}
+
+.footer {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.footerButton {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 999px;
+  border: none;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 6px 14px rgba(255, 150, 190, 0.24);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.footerButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 8px rgba(255, 150, 190, 0.2);
+}
+
+.footerButtonRetry {
+  background: #ffe9b8;
+  color: #7a5a1f;
+}
+
+.footerButtonHome {
+  background: #fff4dd;
+  color: #7a5a1f;
+}
+
