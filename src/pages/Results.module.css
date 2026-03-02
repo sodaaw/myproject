@@ -40,8 +40,10 @@
   justify-content: center;
   color: #fffdfc;
   font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
+  font-size: 1.32rem;
+  letter-spacing: -0.02em;
+  font-family: 'GriunMongtori', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', sans-serif;
 }
 
 .headerRibbon::before,
