@@ -1,0 +1,109 @@
+/* ============================================
+   Cute Pastel Design System - Theme Tokens
+   ============================================ */
+
+:root {
+  /* Raw color tokens */
+  --color-strawberry-pink: #F8C8DC;
+  --color-soft-pink: #FFDDEB;
+  --color-milk-white: #FFF6FA;
+  --color-clover-green: #CDE8B6;
+  --color-accent-pink: #FF7FA8;
+
+  /* Semantic variables */
+  --color-bg-primary: var(--color-strawberry-pink);
+  --color-bg-soft: var(--color-soft-pink);
+  --color-surface: var(--color-milk-white);
+  --color-accent: var(--color-accent-pink);
+  --color-accent-strong: var(--color-accent-pink);
+  --color-text-primary: #3d2c3a;
+
+  /* Design defaults */
+  --radius-default: 16px;
+  --radius-button: 24px;
+  --radius-card: 20px;
+  --transition-default: 0.2s ease;
+  --shadow-soft: 0 4px 16px rgba(255, 127, 168, 0.15);
+  --shadow-elevated: 0 8px 24px rgba(255, 127, 168, 0.2);
+}
+
+/* ============================================
+   AppLayout (design-system layout wrapper)
+   ============================================ */
+
+.ds-layout {
+  width: 100%;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  .ds-layout {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ds-layout {
+    max-width: 1024px;
+  }
+}
+
+/* ============================================
+   Button (use with .ds-btn .ds-btn--primary | .ds-btn--soft)
+   ============================================ */
+
+.ds-btn {
+  display: block;
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: var(--radius-button);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--transition-default), box-shadow var(--transition-default);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ds-btn:active {
+  transform: scale(0.98);
+}
+
+.ds-btn--primary {
+  background: var(--color-accent);
+  color: white;
+  box-shadow: var(--shadow-soft);
+}
+
+.ds-btn--primary:active {
+  box-shadow: 0 2px 12px rgba(255, 127, 168, 0.25);
+}
+
+.ds-btn--soft {
+  background: var(--color-bg-soft);
+  color: var(--color-accent);
+}
+
+.ds-btn--soft:active {
+  opacity: 0.9;
+}
+
+/* ============================================
+   Card (use with .ds-card, optional .ds-card--elevated)
+   ============================================ */
+
+.ds-card {
+  background: var(--color-surface);
+  padding: 20px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow var(--transition-default);
+}
+
+.ds-card--elevated {
+  box-shadow: var(--shadow-elevated);
+}

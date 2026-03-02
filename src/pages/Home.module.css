@@ -1,0 +1,38 @@
+/* Home - image-based layout: full-screen bg + bottom CTA button */
+
+.root {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+
+  /* background image is set via inline style from Home.tsx */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.button {
+  position: absolute;
+  left: 50%;
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.buttonImage {
+  display: block;
+  width: 68vw;
+  max-width: 320px;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .buttonImage {
+    width: 260px;
+  }
+}
