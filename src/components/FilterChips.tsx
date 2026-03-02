@@ -7,7 +7,7 @@ interface FilterChip {
 }
 
 interface FilterChipsProps {
-  filters: FilterChip[];
+  filters: readonly FilterChip[];
   selectedIds: string[];
   onToggle: (id: string) => void;
 }

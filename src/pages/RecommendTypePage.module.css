@@ -5,16 +5,18 @@
   justify-content: center;
   align-items: center;
   padding: 24px 16px;
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 55%),
-    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.9), transparent 55%),
-    linear-gradient(180deg, #ffe9f6 0%, #ffe0f0 40%, #ffe9f6 100%);
+  position: relative;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .card {
   width: 100%;
   max-width: 420px;
   border-radius: 24px;
+  border: 1px solid rgba(255, 117, 184, 0.8);
   background: #fff7fd;
   box-shadow:
     0 18px 40px rgba(255, 137, 186, 0.3),
@@ -46,20 +48,22 @@
 .headerRibbon::after {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #ff8cbc;
-  bottom: -6px;
-  box-shadow: 0 6px 10px rgba(255, 120, 175, 0.5);
+  width: 192px;
+  height: 120px;
+  top: -35px;
+  background-image: url('../assets/wing.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .headerRibbon::before {
-  left: 10px;
+  left: -140px;
+  transform: scaleX(-1);
 }
 
 .headerRibbon::after {
-  right: 10px;
+  right: -140px;
+  transform: scaleX(1);
 }
 
 .body {

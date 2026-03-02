@@ -4,11 +4,6 @@
 
 import { create } from 'zustand';
 
-interface PlaceFeedback {
-  placeId: string;
-  weight: number; // +1 (like), -1 (dislike), 0 (없음)
-}
-
 interface AppState {
   feedbacks: Record<string, number>; // placeId -> weight
   updateFeedback: (placeId: string, weight: number) => void;

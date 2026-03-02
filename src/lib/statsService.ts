@@ -1,7 +1,6 @@
 // 통계 계산 서비스
 // 나중에 실제 통계 로직으로 교체 가능
 
-import type { Place } from '../mock/places';
 import { getAllPlaces } from '../services/placesService';
 
 export interface NoiseDistribution {

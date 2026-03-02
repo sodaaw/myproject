@@ -3,18 +3,20 @@
   min-height: 100dvh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 24px 16px;
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 55%),
-    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.9), transparent 55%),
-    linear-gradient(180deg, #ffe9f6 0%, #ffe0f0 40%, #ffe9f6 100%);
+  position: relative;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .card {
   width: 100%;
   max-width: 420px;
   border-radius: 24px;
+  border: 1px solid rgba(255, 117, 184, 0.8);
   background: #fff7fd;
   box-shadow:
     0 18px 40px rgba(255, 137, 186, 0.3),
@@ -46,34 +48,54 @@
 .headerRibbon::after {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #ff8cbc;
-  bottom: -6px;
-  box-shadow: 0 6px 10px rgba(255, 120, 175, 0.5);
+  width: 192px;
+  height: 120px;
+  top: -35px;
+  background-image: url('../assets/wing.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .headerRibbon::before {
-  left: 10px;
+  left: -140px;
+  transform: scaleX(-1);
 }
 
 .headerRibbon::after {
-  right: 10px;
+  right: -140px;
+  transform: scaleX(1);
 }
 
 .progress {
   margin: 12px auto 16px;
-  width: 120px;
+  width: 140px;
   height: 22px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #ffd9f0 0%, #ffc3e6 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #ffd9f0;
+  position: relative;
+  overflow: hidden;
   font-size: 0.8rem;
   font-weight: 600;
   color: #7d4a68;
+}
+
+.progressFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff9fce 0%, #ff6fa9 100%);
+  box-shadow: 0 0 12px rgba(255, 111, 169, 0.7);
+  transition: width 0.25s ease-out;
+}
+
+.progressText {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .body {

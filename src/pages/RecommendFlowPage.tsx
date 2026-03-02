@@ -6,6 +6,7 @@ import { RECOMMEND_STEPS } from '../features/recommend/steps';
 import { initialPreferences, type Preferences } from '../features/recommend/types';
 import type { PlaceTypeGroup } from './RecommendTypePage';
 import styles from './RecommendFlowPage.module.css';
+import recommendBg from '../assets/recommendbg.png';
 
 export function RecommendFlowPage() {
   const navigate = useNavigate();
@@ -56,17 +57,24 @@ export function RecommendFlowPage() {
     goNext();
   };
 
-  const recommendNow = () => {
-    navigate('/results', { state: { preferences, placeTypeGroup } });
-  };
-
   return (
-    <AppShell title="추천받기" showBottomTabs={false} showTopBar={false}>
-      <div className={styles.root}>
+    <AppShell title="추천받기" showBottomTabs={false} showTopBar={false} fullBleed={true}>
+      <div
+        className={styles.root}
+        style={{ backgroundImage: `url(${recommendBg})` }}
+        role="img"
+        aria-label="추천 배경"
+      >
         <div className={styles.card}>
           <div className={styles.headerRibbon}>추천받기</div>
           <div className={styles.progress}>
-            {current} / {total}
+            <div
+              className={styles.progressFill}
+              style={{ width: `${(current / total) * 100}%` }}
+            />
+            <span className={styles.progressText}>
+              {current} / {total}
+            </span>
           </div>
 
           <div className={styles.body}>
@@ -104,10 +112,6 @@ export function RecommendFlowPage() {
             >
               다음 &gt;
             </button>
-          </div>
-
-          <div className={styles.meta}>
-            {step.optional ? '선택 단계' : '핵심 단계'} · {current}/{total}
           </div>
         </div>
       </div>

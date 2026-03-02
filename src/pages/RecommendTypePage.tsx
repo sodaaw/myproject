@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AppShell } from '../components/AppShell';
 import styles from './RecommendTypePage.module.css';
+import recommendBg from '../assets/recommendbg.png';
 
 export type PlaceTypeGroup = 'inside' | 'outside' | 'any';
 
@@ -12,14 +13,19 @@ export const RecommendTypePage = () => {
   };
 
   return (
-    <AppShell title="추천받기" showBottomTabs={false} showTopBar={false}>
-      <div className={styles.root}>
+    <AppShell title="추천받기" showBottomTabs={false} showTopBar={false} fullBleed={true}>
+      <div
+        className={styles.root}
+        style={{ backgroundImage: `url(${recommendBg})` }}
+        role="img"
+        aria-label="추천 배경"
+      >
         <div className={styles.card}>
           <div className={styles.headerRibbon}>추천받기</div>
           <div className={styles.body}>
             <div className={styles.title}>오늘은 어디서 시작해 볼까?</div>
             <div className={styles.helper}>
-              학교 안에서 아늑하게 할지, 잠깐 바람 쐬며 카페로 나갈지 골라줘.
+              학교 안에서 아늑하게 할까, 바람 쐬러 밖으로 나갈까?
             </div>
 
             <div className={styles.options}>

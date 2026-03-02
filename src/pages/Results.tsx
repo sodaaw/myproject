@@ -7,6 +7,7 @@ import type { Preferences } from '../features/recommend/types';
 import type { Place } from '../mock/places';
 import styles from './Results.module.css';
 import type { PlaceTypeGroup } from './RecommendTypePage';
+import recommendBg from '../assets/recommendbg.png';
 
 type ResultsLocationState = {
   preferences?: Preferences;
@@ -43,8 +44,13 @@ export const Results = () => {
   const visiblePlaces = places.slice(0, visibleCount);
 
   return (
-    <AppShell title="추천 결과" showBottomTabs={false} showTopBar={false}>
-      <div className={styles.root}>
+    <AppShell title="추천 결과" showBottomTabs={false} showTopBar={false} fullBleed={true}>
+      <div
+        className={styles.root}
+        style={{ backgroundImage: `url(${recommendBg})` }}
+        role="img"
+        aria-label="추천 결과 배경"
+      >
         <div className={styles.card}>
           <div className={styles.headerRibbon}>추천 결과</div>
 
