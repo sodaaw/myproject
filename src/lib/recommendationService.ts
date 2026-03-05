@@ -20,7 +20,9 @@ export const getRecommendedPlaces = async (
 
   let candidates: Place[] = allPlaces;
   if (placeTypeGroup === 'inside') {
-    candidates = allPlaces.filter((p) => p.type === 'school_space');
+    candidates = allPlaces.filter(
+      (p) => p.type === 'school_space' || p.type === 'school_library',
+    );
   } else if (placeTypeGroup === 'outside') {
     candidates = allPlaces.filter((p) => p.type === 'cafe' || p.type === 'study_space');
   }

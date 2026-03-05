@@ -9,6 +9,7 @@ export const AREA_FILTERS = [
 export const TYPE_FILTERS = [
   { id: 'cafe', label: '☕ 카페' },
   { id: 'school_space', label: '🏫 학교 공간' },
+  { id: 'school_library', label: '🏫 학교 도서관' },
   { id: 'library', label: '📚 도서관' },
   { id: 'study_space', label: '📖 스터디 공간' },
 ] as const;

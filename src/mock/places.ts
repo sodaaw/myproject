@@ -2,7 +2,7 @@
 // 나중에 디자인 변경 시 이 파일의 데이터 구조만 유지하면 됨
 
 export type Area = 'school' | 'town';
-export type PlaceType = 'cafe' | 'school_space' | 'library' | 'study_space';
+export type PlaceType = 'cafe' | 'school_space' | 'school_library' | 'library' | 'study_space';
 export type CostLevel = 1 | 2 | 3;
 export type NoiseLevel = 1 | 2 | 3; // 1: 조용함, 2: 보통, 3: 시끄러움
 export type SeatReliability = 1 | 2 | 3; // 1: 항상 자리 있음, 2: 보통, 3: 자리 없을 때 많음

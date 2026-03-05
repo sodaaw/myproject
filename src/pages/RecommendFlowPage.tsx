@@ -57,6 +57,10 @@ export function RecommendFlowPage() {
     goNext();
   };
 
+  const recommendNow = () => {
+    navigate('/results', { state: { preferences, placeTypeGroup } });
+  };
+
   return (
     <AppShell title="추천받기" showBottomTabs={false} showTopBar={false} fullBleed={true}>
       <div
@@ -90,28 +94,32 @@ export function RecommendFlowPage() {
           </div>
 
           <div className={styles.footer}>
-            <button
-              type="button"
-              onClick={goPrev}
-              className={`${styles.footerButton} ${styles.footerButtonPrev}`}
-            >
-              이전
-            </button>
-            <button
-              type="button"
-              onClick={skipStep}
-              className={`${styles.footerButton} ${styles.footerButtonSkip}`}
-            >
-              건너뛰기
-            </button>
-            <button
-              type="button"
-              onClick={goNext}
-              disabled={!hasSelectionForStep && !isLast}
-              className={`${styles.footerButton} ${styles.footerButtonNext}`}
-            >
-              다음 &gt;
-            </button>
+            <div className={styles.footerMain}>
+              <button
+                type="button"
+                onClick={goPrev}
+                className={`${styles.footerButton} ${styles.footerButtonPrev}`}
+              >
+                이전
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                disabled={!hasSelectionForStep && !isLast}
+                className={`${styles.footerButton} ${styles.footerButtonNext}`}
+              >
+                다음 &gt;
+              </button>
+            </div>
+            <div className={styles.footerSecondary}>
+              <button
+                type="button"
+                onClick={recommendNow}
+                className={styles.footerLink}
+              >
+                여기까지로 해서 추천받기
+              </button>
+            </div>
           </div>
         </div>
       </div>

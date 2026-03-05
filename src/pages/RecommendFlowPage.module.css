@@ -42,7 +42,7 @@
   font-weight: 800;
   font-size: 1.32rem;
   letter-spacing: -0.02em;
-  font-family: 'GriunMongtori', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'MemomentKkukkukk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', sans-serif;
 }
 
@@ -106,8 +106,14 @@
 
 .footer {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 14px;
+}
+
+.footerMain {
+  display: flex;
+  gap: 8px;
 }
 
 .footerButton {
@@ -121,7 +127,7 @@
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 6px 14px rgba(255, 150, 190, 0.24);
   transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-  font-family: 'GriunMongtori', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'MemomentKkukkukk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', sans-serif;
   letter-spacing: -0.02em;
 }
@@ -134,13 +140,7 @@
 .footerButtonPrev {
   background: #ffe9b8;
   color: #7a5a1f;
-  border: 2px solid #7a5a1f;
-}
-
-.footerButtonSkip {
-  background: #fff4dd;
-  color: #7a5a1f;
-  border: 2px solid #7a5a1f;
+  border: 1px solid #7a5a1f;
 }
 
 .footerButtonNext {
@@ -153,6 +153,32 @@
   opacity: 0.6;
   cursor: default;
   box-shadow: none;
+}
+
+.footerSecondary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+}
+
+.footerLink {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.85rem;
+  color: #a3728d;
+  text-decoration: underline;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'MemomentKkukkukk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.footerLink:hover {
+  color: #7d4a68;
 }
 
 .meta {
